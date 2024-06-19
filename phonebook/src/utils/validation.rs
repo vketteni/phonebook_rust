@@ -3,6 +3,14 @@ fn is_numbers_and_spaces(s: &str) -> bool {
     s.chars().all(|c| c.is_numeric() || c.is_whitespace())
 }
 
+pub fn validate_length(value: &str, max_length: usize) -> Result<(), String> {
+    if value.len() > max_length {
+        Err(format!("Value exceeds maximum length of {}", max_length))
+    } else {
+        Ok(())
+    }
+}
+
 pub fn validate_phone_number(pn: &str) -> Result<(), String> {
     if !is_numbers_and_spaces(pn.trim()) {
         Err("Can only contain numbers and spaces.".to_string())

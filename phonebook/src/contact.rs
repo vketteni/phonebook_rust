@@ -1,70 +1,71 @@
-use super::utils::field::Field;
-
+use crate::utils::validation::validate_length;
 pub struct Contact {
-    first_name: Field,
-    last_name: Field,
-    nickname: Field,
-    phone_number: Field,
-    email: Field,
-    address: Field,
+	pub id:				Option<i32>,
+    pub first_name:		Option<String>,
+    pub last_name:		Option<String>,
+    pub nickname:		Option<String>,
+    pub phone_number:	Option<String>,
+    pub email:			Option<String>,
+    pub address:		Option<String>,
 }
 
 impl Contact {
     pub fn new() -> Contact {
 		Contact {
-			first_name:		Field::new(None, 50),
-			last_name:		Field::new(None, 50),
-			nickname:		Field::new(None, 30),
-			phone_number:	Field::new(None, 15),
-			email:			Field::new(None, 100),
-			address:		Field::new(None, 100)
+			id:				None,
+			first_name:		None,
+			last_name:		None,
+			nickname:		None,
+			phone_number:	None,
+			email:			None,
+			address:		None
 		}
     }
 
 	pub fn first_name(&self) -> &str {
-		self.first_name.get_value()
+		self.first_name.as_deref().unwrap_or("")
 	}
 
 	pub fn last_name(&self) -> &str {
-		&self.last_name.get_value()
+		&self.last_name.as_deref().unwrap_or("")
 	}
 
 	pub fn nickname(&self) -> &str {
-		&self.nickname.get_value()
+		&self.nickname.as_deref().unwrap_or("")
 	}
 
 	pub fn phone_number(&self) -> &str {
-		&self.phone_number.get_value()
+		&self.phone_number.as_deref().unwrap_or("")
 	}
 	pub fn email(&self) -> &str {
-		&self.email.get_value()
+		&self.email.as_deref().unwrap_or("")
 	}
 
 	pub fn address(&self) -> &str {
-		&self.address.get_value()
+		&self.address.as_deref().unwrap_or("")
 	}
 
 	pub fn set_first_name(&mut self, first_name: String) {
-		self.first_name.set_value(first_name);
+		self.first_name = Some(first_name)
 	}
 
 	pub fn set_last_name(&mut self, last_name: String) {
-		self.last_name.set_value(last_name);
+		self.last_name = Some(last_name)
 	}
 	
 	pub fn set_nickname(&mut self, nickname: String) {
-		self.nickname.set_value(nickname);
+		self.nickname = Some(nickname)
 	}
 
 	pub fn set_phone_number(&mut self, phone_number: String) {
-		self.phone_number.set_value(phone_number);
+		self.phone_number = Some(phone_number)
 	}
 
 	pub fn set_address(&mut self, address: String) {
-		self.address.set_value(address);
+		self.address = Some(address)
 	}
 
 	pub fn set_email(&mut self, email: String) {
-		self.email.set_value(email);
+		self.email = Some(email)
 	}
 }
