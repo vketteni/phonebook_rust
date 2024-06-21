@@ -1,5 +1,6 @@
 use std::io::{self, Write};
 use crate::utils::validation::validate_length;
+use crate::utils::cmdl_utils::clear_screen;
 
 pub fn read_input() -> String {
     io::stdout().flush().unwrap();
@@ -14,6 +15,7 @@ pub fn prompt_input(prompt: &str, max_length: usize) -> String {
     loop {
         print!("{}", prompt);
         let input = read_input();
+        clear_screen();
         match validate_length(&input, max_length) {
             Ok(()) => return input,
             Err(err) => println!("Error: {}.\nPlease try again.", err),

@@ -22,6 +22,13 @@ impl Contact {
 		}
     }
 
+	pub fn id(&self) -> String {
+		match self.id {
+			Some(id) => return id.to_string(),
+			None =>	return String::from(""),
+		}
+	}
+
 	pub fn first_name(&self) -> &str {
 		self.first_name.as_deref().unwrap_or("")
 	}

@@ -3,7 +3,7 @@ mod contact;
 mod phone_book;
 mod utils;
 
-use utils::input;
+use utils::{cmdl_utils::clear_screen, input};
 use phone_book::PhoneBook;
 use rusqlite::Connection;
 
@@ -14,6 +14,7 @@ fn main() {
 
     let phone_book = PhoneBook::new(conn);
 
+    clear_screen();
     loop {
         println!("Menu:");
         println!("1. ADD");
@@ -30,10 +31,14 @@ fn main() {
                 }
             },
 			"2" => {
-				println!("SEARCH not yet implemented.");
+                match phone_book.get_contacts() {
+                    Ok(contacts) => phone_book.search_contacts_interactively(&contacts),
+                    Err(e) => println!("Error failed to search contacts: {}.", e)
+                }
 			},
 			"3" => {
 				println!("Exiting..");
+                break;
 			},
 			_ => println!("Invalid choice, please try again."),
         }
