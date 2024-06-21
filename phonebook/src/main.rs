@@ -33,7 +33,7 @@ fn main() {
 			"2" => {
                 match phone_book.get_contacts() {
                     Ok(contacts) => phone_book.search_contacts_interactively(&contacts),
-                    Err(e) => println!("Error failed to search contacts: {}.", e)
+                    Err(e) => println!("Failed to search contacts: {}", e)
                 }
 			},
 			"3" => {

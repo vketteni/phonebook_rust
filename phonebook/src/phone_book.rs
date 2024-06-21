@@ -121,9 +121,17 @@ impl PhoneBook {
             match input::prompt_input(
                 "Enter your choice: ",
                 constants::MAX_MENU_OPTION_LENGTH,
-            ).as_str() {
-                "n" => { current_page = (current_page + 1).max(((contacts.len() + (page_size - 1))/ page_size) - 1); },
-                "p" => { current_page = (current_page - 1).min(0); },
+            ).as_str() { 
+                "n" => {
+                    if ((contacts.len() + (page_size - 1))/ page_size) - 1 > current_page {
+                        current_page += 1;
+                    }
+                }
+                "p" => {
+                    if current_page > 0 {
+                        current_page -= 1;
+                    }
+                },
                 "s" => { println!("Specific search not implemented yet.."); },
                 "q" => {
                     println!("Exiting..");
